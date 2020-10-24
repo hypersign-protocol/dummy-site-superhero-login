@@ -37,12 +37,12 @@
    <div class="home marginRight marginLeft">
      <h3 class="leftAlign">Welcome, {{user.fname}} !</h3>
      <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
           <Profile/>
       </div>
-      <div class="col-md-6">
+      <!-- <div class="col-md-6">
         <Dashboard/>
-      </div>
+      </div> -->
      </div>    
    </div>
 </template>
@@ -69,24 +69,7 @@ export default {
   },
   created() {
     const usrStr = localStorage.getItem('user')
-    //console.log(usrStr)
     this.user = JSON.parse(usrStr);
-    //console.log(this.user)
-    // this.userKeys = Object.keys(this.user)
-    // const url = `http://${location.hostname}:9000/api/app/list`;
-    // fetch(url,{
-    //     headers: {
-    //       'x-auth-token': this.authToken
-    //     },
-    //     method: 'POST'
-    //   })
-    // .then(res => res.json())
-    // .then(json => {
-    //   if(json.status == 200){
-    //     this.appList = json.message.list
-    //   }
-    // })
-    // .catch(e => this.notifyErr(`${e.message}`))
   },
   methods: {
     notifySuccess(msg){
@@ -119,37 +102,7 @@ export default {
                 }else{
         this.$router.push('/login')
                 }
-    },
-    // createApp(){
-    //   if(!this.appName) this.notifyErr('AppName can not be blank')
-    //   const url = `http://${location.hostname}:9000/api/app/register`;
-    //   const appData = {
-    //     name: this.appName
-    //   }
-    //   fetch(url,{
-    //       body: JSON.stringify(appData),
-    //       method: 'POST',
-    //       headers: {
-    //         'x-auth-token': this.authToken,
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //       }
-    //     })
-    //   .then(res => res.json())
-    //   .then(json => {
-    //     if(json.status == 200){
-    //       this.appList.push(json.message)
-    //       this.notifySuccess("App successfully created")
-    //     }
-    //   })
-    //   .catch(e => {
-    //     this.notifyErr(e.message)
-    //   })
-    // },
-    // goToDetailsPage: function(id) {
-    //     this.$router.push("/studio/apps/"+id);
-    // }
-
+    }
   }
 };
 </script>

@@ -61,7 +61,7 @@
 
 <template>  
   <div class="row">
-    <div class="col-md-12" style="margin-top:2%; margin-bottom:7%">
+    <!-- <div class="col-md-12" style="margin-top:2%; margin-bottom:7%">
       <div class="row">
         <div class="col-md-5">
           <div class="card">
@@ -76,7 +76,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="col-md-10 leftAlign">
       <div class="card">
         <div class="card-body">
@@ -133,7 +133,7 @@ export default {
     this.user = { ...JSON.parse(usrStr) };
     //console.log(this.user);
     this.userKeys = Object.keys(this.user);
-    this.pollData()
+    // this.pollData()
   },
   methods: {
     fetchData(url,options){

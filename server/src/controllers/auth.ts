@@ -119,13 +119,23 @@ const verifyChallenge = async (req: Request, res: Response) => {
         const subject = vpObj['verifiableCredential'][0]['credentialSubject'];
 
         // First check is user exist (make sure to check if he is active too)
-        let userObj = new User({ } as IUser)
-        let userindb = await userObj.fetch({
-            email: subject['Email'], // get email from vp
-            publicKey: subject['id'], // get did from vp
-            isActive: "1"
-        })
-        if (!userindb) throw new Error(`User ${subject['id']} does exists or has not been varified`)
+        let userObj = new User({ ...subject } as IUser)
+        userObj.email = subject['Email']
+        userObj.publicKey = subject['id']
+        userObj.fname = subject['Name']
+        let userindb = await userObj.fetch()
+
+        // let userindb = await userObj.fetch({
+        //     email: subject['Email'], // get email from vp
+        //     publicKey: subject['id'], // get did from vp
+        // })
+
+        if (!userindb){
+            // This is first time user so create his profile...
+            userindb  = await userObj.create()
+
+        } 
+        
 
         // Check if challege is expired.
         const chIndb:IChallenge = ChallengeStore[challenge]
