@@ -75,6 +75,8 @@ const hypersignSDK = {
     credential: hsdk.credential(options)
 }
 
+const challengeExpTime = 5 // time at which session challenge will expire (in minutes)
+
 export  {
     port,
     host,
@@ -86,5 +88,6 @@ export  {
     nodeServer,
     mail,
     bootstrapConfig,
-    hypersignSDK
+    hypersignSDK,
+    challengeExpTime
 }

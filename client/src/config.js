@@ -6,7 +6,7 @@ const config = {
         BASE_URL: EnvProvider.value('STUDIO_SERVER_BASE_URL'),
         CRED_LIST_EP: EnvProvider.value('STUDIO_SERVER_CRED_LIST_EP') || "api/credential/list",
         CRED_ISSUE_EP: EnvProvider.value('STUDIO_SERVER_CRED_ISSUE_EP') || "api/credential/issue",
-        AUTH_CHALLENGE_EP: EnvProvider.value('STUDIO_SERVER_AUTH_CHALLENGE_EP') || "api/auth/challenge",
+        AUTH_CHALLENGE_EP: EnvProvider.value('STUDIO_SERVER_AUTH_CHALLENGE_EP') || "api/auth/newchallenge",
         AUTH_LOGIN_EP: EnvProvider.value('STUDIO_SERVER_AUTH_LOGIN_EP') || "api/auth/login"
     },
     nodeServer: {

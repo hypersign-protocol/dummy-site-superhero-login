@@ -37,4 +37,9 @@ router.get('/did', async (req, res) => {
 
 router.get('/credential', authCtrl.getCredential)
 
+
+router.get('/newchallenge', authCtrl.getChallenge)
+router.get('/pollchallenge', authCtrl.pollChallenge)
+router.post('/verifychallenge', authCtrl.verifyChallenge)
+
 export default router;

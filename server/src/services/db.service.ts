@@ -1,4 +1,3 @@
-import { CREATE_USER_TABLE, ADD_USER, GET_USER, DROP_USER_TABLE } from './db.query'
 import IUser from '../models/IUser';
 import IApplication from '../models/IApplication';
 // import { keys } from 'ts-transformer-keys';
@@ -7,7 +6,7 @@ import { db, logger } from '../config'
 const FieldMap = Object.freeze({
     User: ["id","fname","lname","phoneNumber","username","password","email","publicKey","privateKey","hash","birthdate","jobTitle", "isActive"],
     Application: ["id","appId","appSecret","isActive", "name", "userId"],
-    VerifiableCredential: ["id",    "subject",    "issuer",    "schemaId",    "dataHash"]
+    VerifiableCredential: ["id",    "subject",    "issuer",    "schemaId",    "dataHash"],
 })
 
     
@@ -51,7 +50,7 @@ export class DBService{
         switch(type){
             case SchemaType.User: keysOfModel = FieldMap.User; break;
             case SchemaType.Application: keysOfModel = FieldMap.Application; break;
-            case SchemaType.VerifiableCredential: keysOfModel = FieldMap.VerifiableCredential; break;
+            case SchemaType.VerifiableCredential: keysOfModel = FieldMap.VerifiableCredential; break;            
         }
         return keysOfModel
     }

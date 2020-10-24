@@ -99,7 +99,7 @@ export class User implements IUser{
     
 
     async fetch(obj = {}){    
-        if(obj == {}){
+        if(Object.keys(obj).length === 0){
             obj = {email: this.email}
         }
         let user:IUser = await this.dbSerice.getOne(SchemaType.User, obj);

@@ -53,7 +53,7 @@ h5 span {
           <div class="row">
             <form action="#" class="col-md-12">
               <div class="form-group">
-                <qrcode-vue :value="QRCodeValue" :size="150" level="H"></qrcode-vue>
+                <qrcode-vue :value="value" :size="200" level="H"></qrcode-vue>
                 <label>Scan the QR code using Hypersign App in your mobile phone to authenticate!</label>
               </div>
               <div class="form-group">
@@ -124,9 +124,9 @@ export default {
       host: location.hostname,
       challenge: "dddd",
       domain: location.host,
-      QRCodeValue: this.$route.query,
       credentials: {},
       userData: {},
+      value: '',
       user: {},
       verifiablePresentation: "",
       fullPage: true,
@@ -144,15 +144,73 @@ export default {
       .then((json) => {
         //console.log(json);
         if (json.status == 200) {
-          this.challenge = json.message;
+          this.challenge = {
+            challenge: json.message.challenge,
+            JWTChallenge: json.message.JWTChallenge
+          };
+          const baseUrl = this.$config.studioServer.BASE_URL.replace(/\/+$/, "");
+          this.value = `${baseUrl}${json.message.verifyChallengeApi}?challenge=${this.challenge.challenge}`
+          const pollUrl = `${baseUrl}${json.message.pollChallengeApi}`
+          this.poll(pollUrl) 
         }
       })
       .catch((e) => this.notifyErr(`Error: ${e.message}`));
+    
   },
   mounted() {
     this.clean();
   },
   methods: {
+    async poll(url){
+       var _this = this;
+      const interval = setInterval(function (){
+          fetch(url)
+          .then(res => res.json())
+          .then(json => {
+              if(json.status == 200){
+                  if(!json.message.status){
+                     // 
+                     if(json.message.m.indexOf('expired') > -1){
+                        clearInterval(interval)
+                        alert('Challenge expired. Please reload this page.')   
+                        _this.isLoading = true;
+                        setTimeout(() => {
+                          _this.isLoading = false;
+                          _this.$router.push("login")
+                        }, 2000)
+                     }else{
+                       console.log(json.message.m)
+                     }
+                  }else{
+                    _this.isLoading = true;
+                    clearInterval(interval)
+                    setTimeout(function (){
+                        _this.isLoading = false;
+                        console.log('Verifierd! Moving to login page...')
+                        // go to home page
+                        localStorage.setItem("authToken",json.message.jwtToken);
+                        localStorage.setItem("user", JSON.stringify(json.message.user));
+                        if (localStorage.getItem("authToken") != null) {
+                          if (_this.$route.params.nextUrl != null) {
+                            _this.$router.push(_this.$route.params.nextUrl);
+                          } else {
+                            _this.$router.push("dashboard");
+                          }
+                        }
+                    }, 2000)
+                    
+                  }
+              }else{
+                  clearInterval(interval)
+                  alert(`Error: ${json.message.error}`)
+              }
+          })
+          .catch(e => {
+              clearInterval(interval)
+              alert(`Error: ${e.message}`)
+          })
+      }, 5000)
+    },
     push(path){
       this.$router.push(path)
     },
@@ -284,11 +342,9 @@ export default {
           .then((res) => res.json())
           .then((j) => {
             this.isLoading = false;
-            if (j && j.status == 500) {
+            if (j && j.status != 200) {
               return this.notifyErr(`Error:  ${j.error}`);
             }
-
-            //console.log(j.message);
 
             localStorage.setItem("authToken", j.message.jwtToken);
             j.message.user["privateKey"] = this.user.privateKey;
