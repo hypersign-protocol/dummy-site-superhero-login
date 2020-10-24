@@ -22,7 +22,7 @@ const config = {
         NEW_DID_EP: EnvProvider.value('EXPLORER_NEW_DID_EP') || "newdid"
     },
     app: {
-        name: EnvProvider.value('TITLE') || "Hypersign Studio",
+        name: EnvProvider.value('TITLE') || "Demo Website",
         decription: EnvProvider.value('DESC'),
         version: EnvProvider.value('VERSION')
     },
