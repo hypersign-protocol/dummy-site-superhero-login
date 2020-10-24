@@ -5,7 +5,7 @@
     "main": "dist/index",
     "typings": "dist/index",
     "scripts": {
-        "setup": "npm run setEnv && npm run build && npm run newdb && npm run bootstrap",
+        "setup": "npm run setEnv && npm run build && npm run newdb",
         "newdb": "npm run start -- --newdb",
         "setup-noenv": "npm run build && npm run start -- --newdb && npm run setUI",
         "setEnv": "if [ -e .env.staging ]; then cp .env.staging .env; fi",
@@ -13,7 +13,6 @@
         "start": "node dist/index.js",
         "dev": "nodemon src/index.ts",
         "build": "tsc -p .",
-        "bootstrap": "npm run start -- --bootstrap",
         "test": "mocha -r ts-node/register src/tests/**/*.test.ts"
     },
     "author": "Vishwas Anand Bhushan",
