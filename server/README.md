@@ -1,8 +1,8 @@
 ## Server
 
 ```
-npm run setup 
-npm run start
+npm run newdb
+npm run build && npm run start
 ```
 
 The server Will run on port `:9000`

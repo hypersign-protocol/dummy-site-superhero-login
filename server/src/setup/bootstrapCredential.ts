@@ -28,10 +28,10 @@ const registerSchema = async () => {
     logger.info("Fetched keys = " + JSON.stringify(keys))
     const url = `${nodeServer.baseURl}${nodeServer.schemaCreateEp}`;
     const schemaData = {
-        name: "HypersignAuthCredential",
+        name: "Superhero.com",
         owner: keys.publicKey.id.split('#')[0],
         attributes: ["Name", "Email"],
-        description: "Hypersign Authentication Credential",
+        description: "Superhero Authentication Credential",
     };
     let headers = {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const registerSchema = async () => {
 }
 
 export async function bootstrap(){
-    await registerDid("hypersign")
+    await registerDid("Superhero")
     await registerSchema();
 }
 

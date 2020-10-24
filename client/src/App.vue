@@ -11,15 +11,13 @@
 }
 
 .nav-style{
-  background: #FFFFFF;
+  background: black;
   margin-bottom: 1%;
   padding:5px;
   padding-left:1.5%;
   text-align: left;
   box-shadow:
-         rgba(0, 0, 0, 0.1) 0px 2px 2px 0px, 
-            rgba(0, 0, 0, 0.02) 0px 3px 1px -2px, 
-            rgba(0, 0, 0, 0.01) 0px 1px 5px 0px;
+        0 2px 2px 0 rgba(0, 0, 0, 0.59),0 3px 1px -2px rgba(0,0,0,.02),0 1px 5px 0 rgba(0,0,0,.01)
 }
 
 .rightAlign{
@@ -43,12 +41,11 @@
   margin: 0;
   width: 100%;
   min-height: 100vh;
-  background: #F6F6F687;
+  background: hsla(202.7, 96.9%, 74.3%, 0.24);
 }
-
-.subtitle{
-  padding-left: 10px;
-  color: gray;
+/* background:#1c1c24 */
+.subtitle{  
+  color: white;
   font-size: larger;
   margin-top: auto;
 }
@@ -61,8 +58,7 @@
       <div class="col-md-4">        
         <!-- <h5 class="leftAlign">{{$config.app.name}}</h5>  -->
         <div class="form-group form-inline">
-          <img class="logo-style" src="https://hypermine.in/hypersign/wp-content/uploads/2020/01/Banner_logo2.png"> 
-          <h4 class="subtitle"> <span style="opacity:0.4">|</span> {{$config.app.name}} ({{$config.app.version}})</h4>  
+          <h4 class="subtitle">{{$config.app.name}} ({{$config.app.version}})</h4>  
         </div>
       </div>
         <div class="col-md-8 rightAlign" style="padding-top:12px" v-if="!(authRoutes.includes($router.history.current.name))">
@@ -140,26 +136,6 @@ export default {
     return {
       authRoutes:  ['register', 'PKIIdLogin'],
       menu: [
-        { 
-          name: "Dashboard",  
-          path: "/studio/dashboard",
-          isShow: true,
-        },
-        { 
-          name: "Schema",  
-          path: "/studio/schema",
-          isShow: true,
-        },
-        { 
-          name: "Credentials",  
-          path: "/studio/credential",
-          isShow: true,
-        },
-        { 
-          name: "Presentation",  
-          path: "/studio/presentation",
-          isShow: true,
-        },
         {
           name: "Logout",
           path: "/login",
