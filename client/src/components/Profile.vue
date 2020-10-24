@@ -47,7 +47,7 @@
   border-bottom: 1px solid #8080802b;
 }
 .fVal {
-  font-size: small;
+  font-size: larger;
   color: gray;
   word-wrap: break-word;
 }
@@ -78,7 +78,7 @@
       </div>
     </div> -->
     <div class="col-md-10 leftAlign">
-      <div class="card">
+      <div class="card" style="border-top: 4px solid #00f9; margin-top: 5%;">
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
