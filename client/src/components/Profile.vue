@@ -92,7 +92,7 @@
               <p>DID</p>
               <p class="fVal"><a :href="`${$config.nodeServer.BASE_URL}${$config.nodeServer.DID_RESOLVE_EP}`+user.id" target="_blank">{{user.id}}</a></p>
               <p>Email</p>
-              <p class="fVal">{{user.email}}</p>
+              <p class="fVal">{{user.Email}}</p>
               <p v-if="user.phoneNumber">Phone Number: {{user.phoneNumber}}</p>
               <!-- <p>PUBLIC KEY</p>
               <p class="fVal">{{user.publicKey}}</p> -->

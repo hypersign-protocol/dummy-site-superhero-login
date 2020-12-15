@@ -41,15 +41,14 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        const authToken = localStorage.getItem('authToken')
+        const authToken = localStorage.getItem('authToken');
         if (authToken) {
-            const url = `${config.studioServer.BASE_URL}api/auth/verify`
-            console.log(url)
+            const url = `${config.studioServer.BASE_URL}protected`
             fetch(url, {
                     headers: {
-                        'x-auth-token': authToken
+                        "x-auth-token": authToken
                     },
-                    method: 'POST'
+                    method: "POST"
                 }).then(res => res.json())
                 .then(json => {
                     if (json.status == 403) {
@@ -58,6 +57,7 @@ router.beforeEach((to, from, next) => {
                             params: { nextUrl: to.fullPath }
                         })
                     } else {
+                        localStorage.setItem("user", JSON.stringify(json.message));
                         next()
                     }
                 })
