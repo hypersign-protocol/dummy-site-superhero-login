@@ -32,7 +32,7 @@
         "qrcode": "^1.4.4",
         "sha.js": "^2.4.11",
         "simple-node-logger": "^18.12.24",
-        "sqlite3": "^5.0.0",
+        "sqlite3": "^5.0.3",
         "uuid": "^8.2.0"
     },
     "devDependencies": {
